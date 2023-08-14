@@ -9,3 +9,7 @@ type GatewayGroupAddOrUpdate struct {
 type GatewayGroupAddOrUpdateRes struct {
 	GroupId string `json:"groupId" description:"组ID"`
 }
+
+type GatewayGroupDelete struct {
+	Id string `json:"id" description:"组ID"`
+}

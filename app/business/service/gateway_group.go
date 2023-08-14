@@ -17,3 +17,9 @@ func (s *GatewayGroupRequest) Save(req *entity.GatewayGroupAddOrUpdate) (resData
 	}
 	return
 }
+
+// Delete 删除组
+func (s *GatewayGroupRequest) Delete(req *entity.GatewayGroupDelete) (res *http.IotRes, err error) {
+	res, err = s.IotClient.PostJson("/device/group/split/delete", req)
+	return
+}

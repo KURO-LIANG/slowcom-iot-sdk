@@ -1,8 +1,8 @@
 package service
 
 import (
-	"codeup.aliyun.com/slowcom/Golang/slowcom-iot-sdk/app/business/entity"
-	"codeup.aliyun.com/slowcom/Golang/slowcom-iot-sdk/http"
+	"github.com/kuro-liang/slowcom-iot-sdk/app/business/entity"
+	"github.com/kuro-liang/slowcom-iot-sdk/http"
 )
 
 type GatewayGroupRequest struct {

@@ -1,5 +1,5 @@
-module codeup.aliyun.com/slowcom/Golang/slowcom-iot-sdk
+module github.com/kuro-liang/slowcom-iot-sdk
 
-require (
-	github.com/ddliu/go-httpclient v0.7.1 // indirect
-)
+go 1.19
+
+require github.com/ddliu/go-httpclient v0.7.1 // indirect

@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ddliu/go-httpclient"
-	"codeup.aliyun.com/slowcom/Golang/slowcom-iot-sdk/serror"
+	"github.com/kuro-liang/slowcom-iot-sdk/serror"
 )
 
 type IotBaseRes struct {
-	Code    int         `json:"code" description:"响应码 0-成功"`
-	Message string      `json:"message" description:"响应消息"`
+	Code    int    `json:"code" description:"响应码 0-成功"`
+	Message string `json:"message" description:"响应消息"`
 }
 type IotRes struct {
 	IotBaseRes

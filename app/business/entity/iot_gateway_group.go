@@ -5,3 +5,7 @@ type GatewayGroupAddOrUpdate struct {
 	Alias string `json:"alias" description:"组别名"`
 	Mode  int    `json:"mode" description:"模式"`
 }
+
+type GatewayGroupAddOrUpdateRes struct {
+	GroupId string `json:"groupId" description:"组ID"`
+}

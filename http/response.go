@@ -2,7 +2,6 @@ package http
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/ddliu/go-httpclient"
 	"github.com/kuro-liang/slowcom-iot-sdk/serror"
 )
@@ -22,7 +21,7 @@ func checkResponse(res *httpclient.Response, requestError error) (iotResponse *I
 		return nil, serror.New(405, "请求服务异常：请求超时")
 	}
 	if res.Response.StatusCode != 200 {
-		return nil, serror.New(res.Response.StatusCode, fmt.Sprint(res.Response.StatusCode, " 请求服务异常"))
+		return nil, serror.New(res.Response.StatusCode, res.Response.Status)
 	}
 	bytes, err := res.ReadAll()
 	if err != nil {

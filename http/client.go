@@ -39,7 +39,7 @@ func buildHttpClient() *httpclient.HttpClient {
 
 // PostJson json请求
 func (s *IotClient) PostJson(url string, data interface{}) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).
 		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
@@ -47,7 +47,7 @@ func (s *IotClient) PostJson(url string, data interface{}) (response *IotRes, er
 
 // PutJson json请求
 func (s *IotClient) PutJson(url, data interface{}) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).
 		PutJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
@@ -55,7 +55,7 @@ func (s *IotClient) PutJson(url, data interface{}) (response *IotRes, err error)
 
 // Get get请求
 func (s *IotClient) Get(url string) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).
 		Get(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
@@ -63,15 +63,14 @@ func (s *IotClient) Get(url string) (response *IotRes, err error) {
 
 // Delete 删除请求
 func (s *IotClient) Delete(url string) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).Delete(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).Delete(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
 }
 
 // GetToken 获取token
 func (s *IotClient) GetToken(url string, data interface{}) (response *entity.IotTokenRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).
-		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
+	res, err := buildHttpClient().PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	if err != nil {
 		return nil, serror.New(405, "请求服务异常：请求超时")
 	}

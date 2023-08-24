@@ -14,7 +14,9 @@ type GatewayGroupRequest struct {
 func (s *GatewayGroupRequest) Save(req *entity.GatewayGroupAddOrUpdate) (resData *entity.GatewayGroupAddOrUpdateRes, err error) {
 	res, err := s.IotClient.PostJson("/device/group/split/save", req)
 	if err == nil {
-		resData = res.Data.(*entity.GatewayGroupAddOrUpdateRes)
+		resData = new(entity.GatewayGroupAddOrUpdateRes)
+		var mapData = res.Data.(map[string]interface{})
+		resData.GroupId = mapData["groupId"].(string)
 	}
 	return
 }

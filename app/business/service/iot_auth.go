@@ -25,7 +25,10 @@ func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *en
 	}
 	res, err := s.IotClient.PostJson("/v1/api/third/conf/view", request)
 	if err == nil {
-		resData = res.Data.(*entity.IotAuthSettingRes)
+		resData = new(entity.IotAuthSettingRes)
+		var mapData = res.Data.(map[string]interface{})
+		resData.ReturnMessage = mapData["return_message"].(string)
+		resData.ReturnCode = mapData["return_code"].(string)
 	}
 	return
 }

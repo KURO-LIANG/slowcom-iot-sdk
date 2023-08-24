@@ -9,7 +9,7 @@ type GatewayTokenRequest struct {
 	IotClient *http.IotClient
 }
 
-func (s *GatewayTokenRequest) GetNewToken() (res *http.IotRes, err error) {
+func (s *GatewayTokenRequest) GetNewToken() (res *entity.IotTokenRes, err error) {
 	var req = &entity.IotTokenReq{
 		GrantType:    "password",
 		ClientId:     s.IotClient.ClientId,
@@ -17,11 +17,11 @@ func (s *GatewayTokenRequest) GetNewToken() (res *http.IotRes, err error) {
 		Username:     s.IotClient.Username,
 		Password:     s.IotClient.Password,
 	}
-	res, err = s.IotClient.PostJson("/api/login/oauth/access_token", req)
+	res, err = s.IotClient.GetToken("/api/login/oauth/access_token", req)
 	return
 }
 
-func (s *GatewayTokenRequest) RefreshToken(scope string, refreshKey string) (res *http.IotRes, err error) {
+func (s *GatewayTokenRequest) RefreshToken(scope string, refreshKey string) (res *entity.IotTokenRes, err error) {
 	var req = &entity.IotTokenRefreshReq{
 		GrantType:    "refresh_token",
 		ClientId:     s.IotClient.ClientId,
@@ -29,6 +29,6 @@ func (s *GatewayTokenRequest) RefreshToken(scope string, refreshKey string) (res
 		Scope:        scope,
 		RefreshToken: refreshKey,
 	}
-	res, err = s.IotClient.PostJson("/api/login/oauth/refresh_token", req)
+	res, err = s.IotClient.GetToken("/api/login/oauth/refresh_token", req)
 	return
 }

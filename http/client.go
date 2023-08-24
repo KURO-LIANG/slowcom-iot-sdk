@@ -1,15 +1,17 @@
 package http
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/ddliu/go-httpclient"
+	"github.com/kuro-liang/slowcom-iot-sdk/app/business/entity"
+	"github.com/kuro-liang/slowcom-iot-sdk/serror"
 	netUrl "net/url"
 	"sync"
 )
 
 type IotClient struct {
 	BaseUrl      string
-	AuthUrl      string
 	ClientId     string
 	ClientSecret string
 	Username     string
@@ -64,4 +66,29 @@ func (s *IotClient) Delete(url string) (response *IotRes, err error) {
 	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).Delete(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
+}
+
+// GetToken 获取token
+func (s *IotClient) GetToken(url string, data interface{}) (response *entity.IotTokenRes, err error) {
+	res, err := buildHttpClient().WithHeader("Authorization", "Bearer "+s.AccessToken).
+		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
+	if err != nil {
+		return nil, serror.New(405, "请求服务异常：请求超时")
+	}
+	if res.Response.StatusCode != 200 {
+		return nil, serror.New(res.Response.StatusCode, fmt.Sprint(res.Response.StatusCode, " 请求服务异常"))
+	}
+	bytes, err := res.ReadAll()
+	if err != nil {
+		return nil, serror.ErrIs数据解析异常
+	}
+	err = json.Unmarshal(bytes, &response)
+	if err != nil {
+		return nil, serror.ErrIs数据解析异常
+	}
+	if response.Error == "" {
+		return
+	} else {
+		return response, serror.New(500, response.Error)
+	}
 }

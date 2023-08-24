@@ -10,6 +10,6 @@ type GatewaySubscribeRequest struct {
 }
 
 func (s *GatewaySubscribeRequest) Subscribe(req *entity.SubscribeReq) (res *http.IotRes, err error) {
-	res, err = s.IotClient.PostJson("/subscribeMessages/subscribe", req)
+	res, err = s.IotClient.PostJson("/device/subscribeMessages/subscribe", req)
 	return
 }

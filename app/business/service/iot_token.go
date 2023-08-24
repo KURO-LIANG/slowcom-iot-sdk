@@ -17,7 +17,7 @@ func (s *GatewayTokenRequest) GetNewToken() (res *http.IotRes, err error) {
 		Username:     s.IotClient.Username,
 		Password:     s.IotClient.Password,
 	}
-	res, err = s.IotClient.PostJson(s.IotClient.AuthUrl+"/api/login/oauth/access_token", req)
+	res, err = s.IotClient.PostJson("/api/login/oauth/access_token", req)
 	return
 }
 
@@ -29,6 +29,6 @@ func (s *GatewayTokenRequest) RefreshToken(scope string, refreshKey string) (res
 		Scope:        scope,
 		RefreshToken: refreshKey,
 	}
-	res, err = s.IotClient.PostJson(s.IotClient.AuthUrl+"/api/login/oauth/refresh_token", req)
+	res, err = s.IotClient.PostJson("/api/login/oauth/refresh_token", req)
 	return
 }

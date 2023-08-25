@@ -2,6 +2,7 @@ package service
 
 import (
 	"crypto/md5"
+	"encoding/json"
 	"fmt"
 	"github.com/kuro-liang/slowcom-iot-sdk/app/business/entity"
 	"github.com/kuro-liang/slowcom-iot-sdk/http"
@@ -23,12 +24,12 @@ func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *en
 		Sign:      sign,
 		Data:      req,
 	}
-	res, err := s.IotClient.PostJson("/third/conf/view", request)
-	if err == nil {
-		resData = new(entity.IotAuthSettingRes)
-		var mapData = res.Data.(map[string]interface{})
-		resData.ReturnMessage = mapData["return_message"].(string)
-		resData.ReturnCode = mapData["return_code"].(string)
+	res, e := s.IotClient.PostJson("/third/conf/view", request)
+	if e == nil {
+		d, _ := json.Marshal(res.Data)
+		_ = json.Unmarshal(d, &resData)
+		return
 	}
+	err = e
 	return
 }

@@ -32,3 +32,9 @@ func (s *GatewayGroupRequest) GroupDetail(groupId string) (res *http.IotRes, err
 	res, err = s.IotClient.Get(fmt.Sprint("/device/group/room/detail/", groupId))
 	return
 }
+
+// GetGroupDetailByGatewayId 根据网关ID获取网关的绑定状态
+func (s *GatewayGroupRequest) GetGroupDetailByGatewayId(gatewayId string) (res *http.IotRes, err error) {
+	res, err = s.IotClient.Get(fmt.Sprint("/device/group/detailFromGateway/", gatewayId))
+	return
+}

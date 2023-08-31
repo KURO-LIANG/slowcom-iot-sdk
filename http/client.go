@@ -23,7 +23,7 @@ type IotClient struct {
 const (
 	USERAGENT       = "slowcom_agent"
 	TIMEOUT         = 30
-	CONNECT_TIMEOUT = 10
+	CONNECT_TIMEOUT = 30
 )
 
 // 生成一个http请求客户端

@@ -41,7 +41,7 @@ func (s *GatewayGroupRequest) GetGroupDetailByGatewayId(gatewayId string) (res *
 
 // GroupListByIds 根据组ID列表获取组详情
 func (s *GatewayGroupRequest) GroupListByIds(groupIds []string) (res *http.IotRes, err error) {
-	res, err = s.IotClient.PostJson("/device/group/groupListByIds", map[string]interface{}{
+	res, err = s.IotClient.PostJson("/device/group/room/groupListByIds", map[string]interface{}{
 		"ids": groupIds,
 	})
 	return

@@ -17,7 +17,7 @@ type IotAuthRequest struct {
 // AuthSetting 第三方请求回调鉴权配置
 func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *entity.IotAuthSettingRes, err error) {
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e9, 10)
-	sign := fmt.Sprintf("%x", md5.Sum([]byte(s.IotClient.ClientId+timestamp)))
+	sign := fmt.Sprintf("%x", md5.Sum([]byte(s.IotClient.Username+timestamp)))
 	var request = entity.IotAuthSettingReq{
 		ClientID:  s.IotClient.Username,
 		Timestamp: timestamp,

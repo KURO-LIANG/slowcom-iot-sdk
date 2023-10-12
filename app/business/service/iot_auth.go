@@ -25,11 +25,8 @@ func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *en
 		Data:      req,
 	}
 	res, e := s.IotClient.PostJson("/third/conf/view", request)
-	if e == nil {
-		d, _ := json.Marshal(res.Data)
-		_ = json.Unmarshal(d, &resData)
-		return
-	}
+	d, _ := json.Marshal(res.Data)
+	_ = json.Unmarshal(d, &resData)
 	err = e
 	return
 }

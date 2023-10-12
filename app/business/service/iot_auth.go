@@ -19,7 +19,7 @@ func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *en
 	timestamp := strconv.FormatInt(time.Now().UnixNano()/1e9, 10)
 	sign := fmt.Sprintf("%x", md5.Sum([]byte(s.IotClient.ClientId+timestamp)))
 	var request = entity.IotAuthSettingReq{
-		ClientID:  s.IotClient.ClientId,
+		ClientID:  s.IotClient.Username,
 		Timestamp: timestamp,
 		Sign:      sign,
 		Data:      req,

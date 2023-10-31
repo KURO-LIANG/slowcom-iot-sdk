@@ -3,6 +3,7 @@ package service
 import (
 	"crypto/md5"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/kuro-liang/slowcom-iot-sdk/app/business/entity"
 	"github.com/kuro-liang/slowcom-iot-sdk/http"
@@ -28,5 +29,23 @@ func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *en
 	d, _ := json.Marshal(res.Data)
 	_ = json.Unmarshal(d, &resData)
 	err = e
+	return
+}
+
+// AuthFresh 第三方刷新用户的鉴权信息
+func (s *IotAuthRequest) AuthFresh(groupId string, token string) (err error) {
+	var request = entity.IotThirdAuthFreshReq{
+		ClientID: s.IotClient.Username,
+		Token:    token,
+		GroupId:  groupId,
+	}
+	res, e := s.IotClient.PostJson("/third/userAuth/fresh", request)
+	if e != nil {
+		return e
+	}
+	if res.Code != 0 {
+		err = errors.New(res.Message)
+		return
+	}
 	return
 }

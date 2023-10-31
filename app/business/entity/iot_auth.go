@@ -20,3 +20,10 @@ type IotAuthSettingRes struct {
 	ReturnCode    string `json:"return_code" description:"状态码"`
 	ReturnMessage string `json:"return_message" description:"错误消息"`
 }
+
+// IotThirdAuthFreshReq 第三方刷新用户的鉴权信息请求参数
+type IotThirdAuthFreshReq struct {
+	ClientID string `json:"clientId" binding:"required" description:"平台ID-即casdoor用户名"`
+	Token    string `json:"token" binding:"required" description:"第三方平台用户的登录token"`
+	GroupId  string `json:"groupId" binding:"required" description:"组ID"`
+}

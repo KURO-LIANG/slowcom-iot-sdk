@@ -33,10 +33,9 @@ func (s *IotAuthRequest) AuthSetting(req entity.IotAuthSettingData) (resData *en
 }
 
 // AuthFresh 第三方刷新用户的鉴权信息
-func (s *IotAuthRequest) AuthFresh(groupId string, token string) (err error) {
+func (s *IotAuthRequest) AuthFresh(groupId string) (err error) {
 	var request = entity.IotThirdAuthFreshReq{
 		ClientID: s.IotClient.Username,
-		Token:    token,
 		GroupId:  groupId,
 	}
 	res, e := s.IotClient.PostJson("/third/userAuth/fresh", request)

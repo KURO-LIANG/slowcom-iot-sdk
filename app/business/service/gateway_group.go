@@ -46,3 +46,9 @@ func (s *GatewayGroupRequest) GroupListByIds(groupIds []string) (res *http.IotRe
 	})
 	return
 }
+
+// SceneList 查询组的情景列表
+func (s *GatewayGroupRequest) SceneList(groupId string, isPrivate uint8) (res *http.IotRes, err error) {
+	res, err = s.IotClient.Get(fmt.Sprintf("/scene/detail/%s/%d", groupId, isPrivate))
+	return
+}

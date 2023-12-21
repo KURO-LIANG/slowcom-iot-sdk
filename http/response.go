@@ -36,6 +36,7 @@ func checkResponse(res *httpclient.Response, requestError error) (iotResponse *I
 	if iotResponse.Code == 0 {
 		return
 	} else {
+		fmt.Printf("iot-sdk iot操作失败<== %+v\n", iotResponse)
 		return iotResponse, serror.New(iotResponse.Code, iotResponse.Message)
 	}
 }

@@ -47,12 +47,6 @@ func (s *GatewayGroupRequest) GroupListByIds(groupIds []string) (res *http.IotRe
 	return
 }
 
-// SceneList 查询组的情景列表
-func (s *GatewayGroupRequest) SceneList(groupId string, isPrivate uint8) (res *http.IotRes, err error) {
-	res, err = s.IotClient.Get(fmt.Sprintf("/device/scene/detail/%s/%d", groupId, isPrivate))
-	return
-}
-
 // Subscribe 订阅某个家庭组的设备状态
 func (s *GatewayGroupRequest) Subscribe(userId string, groupId string) (res *http.IotRes, err error) {
 	res, err = s.IotClient.Get(fmt.Sprintf("/device/control/message/subscribe/addGroup/%s/%s", userId, groupId))

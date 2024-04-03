@@ -55,6 +55,6 @@ func (s *GatewayGroupRequest) SceneList(groupId string, isPrivate uint8) (res *h
 
 // Subscribe 订阅某个家庭组的设备状态
 func (s *GatewayGroupRequest) Subscribe(userId string, groupId string) (res *http.IotRes, err error) {
-	res, err = s.IotClient.Get(fmt.Sprintf("/control/message/subscribe/addGroup/%s/%s", userId, groupId))
+	res, err = s.IotClient.Get(fmt.Sprintf("/device/control/message/subscribe/addGroup/%s/%s", userId, groupId))
 	return
 }

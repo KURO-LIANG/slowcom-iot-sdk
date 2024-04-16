@@ -1,13 +1,15 @@
 package entity
 
 type SleepReport struct {
-	ID       int    `json:"id"`
-	SN       string `json:"sn"`
-	UserName string `json:"userName"`
-	Detail   Detail `json:"detail"`
+	ID         int    `json:"id"`
+	SN         string `json:"sn"`
+	UserName   string `json:"userName"`
+	CreateTime string `json:"createTime"`
+	Detail     Detail `json:"detail"`
 }
 
 type Detail struct {
+	Score         Count    `json:"score"`
 	TotalDuration int      `json:"total_duration"`
 	InBedDuration int      `json:"inbed_duration"`
 	GoBedTime     string   `json:"gobed_time"`

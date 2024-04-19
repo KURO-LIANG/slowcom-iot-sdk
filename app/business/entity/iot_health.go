@@ -33,9 +33,3 @@ type Count struct {
 	State int    `json:"state"`
 	Desc  string `json:"desc"`
 }
-
-type SleepSubscribeReq struct {
-	SN          string `json:"sn"`
-	CallbackUrl string `json:"callbackUrl"`
-	UUID        string `json:"uuid"`
-}

@@ -2,7 +2,6 @@ package service
 
 import (
 	"fmt"
-	"github.com/kuro-liang/slowcom-iot-sdk/app/business/entity"
 	"github.com/kuro-liang/slowcom-iot-sdk/http"
 )
 
@@ -16,8 +15,8 @@ func (s *HealthRequest) GetSleepReport(sn string, limit int) (res *http.IotRes, 
 	return
 }
 
-// Subscribe 设置睡眠带预警回调地址
-func (s *HealthRequest) Subscribe(req entity.SleepSubscribeReq) (res *http.IotRes, err error) {
-	res, err = s.IotClient.PostJson("/health/sleep/subscribe", req)
+// GetSleepWarningList 获取睡眠带预警配置列表
+func (s *HealthRequest) GetSleepWarningList(sn string) (res *http.IotRes, err error) {
+	res, err = s.IotClient.Get(fmt.Sprint("/health/sleep/alarm/setting/list?sn=", sn))
 	return
 }

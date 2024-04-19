@@ -12,3 +12,8 @@ type AddNetworkReq struct {
 	SubdivisionType string `json:"subdivisionType"`
 	IflyosUserCode  string `json:"iflyosUserCode"`
 }
+
+type DeleteNetworkReq struct {
+	GatewayId string `json:"gatewayId"`
+	GroupId   string `json:"groupId"`
+}

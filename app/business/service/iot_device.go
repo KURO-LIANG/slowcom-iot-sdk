@@ -33,3 +33,9 @@ func (s *DeviceRequest) AddOrUpdateNetwork(data entity.AddNetworkReq) (res *http
 	res, err = s.IotClient.PostJson("/device/group/split/gateway/save", data)
 	return
 }
+
+// DeleteNetwork 删除网关设备
+func (s *DeviceRequest) DeleteNetwork(data entity.DeleteNetworkReq) (res *http.IotRes, err error) {
+	res, err = s.IotClient.PostJson("/device/group/split/gateway/delete", data)
+	return
+}

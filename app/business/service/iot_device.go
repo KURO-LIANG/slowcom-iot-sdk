@@ -27,3 +27,9 @@ func (s *DeviceRequest) ControlDevice(data entity.GatewayControlForm) (res *http
 	res, err = s.IotClient.PostJson("/device/control", data)
 	return
 }
+
+// AddOrUpdateNetwork 添加或修改网关设备
+func (s *DeviceRequest) AddOrUpdateNetwork(data entity.AddNetworkReq) (res *http.IotRes, err error) {
+	res, err = s.IotClient.PostJson("/device/group/split/gateway/save", data)
+	return
+}

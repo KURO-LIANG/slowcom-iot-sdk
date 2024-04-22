@@ -33,3 +33,16 @@ type Count struct {
 	State int    `json:"state"`
 	Desc  string `json:"desc"`
 }
+
+type SleepAlarmSettingReq struct {
+	Sn   string               `json:"sn" binding:"required" description:"设备SN"`
+	List []*SleepAlarmSetting `json:"list" binding:"required" description:"报警设置列表"`
+}
+type SleepAlarmSetting struct {
+	AlarmType         int    `json:"alarmType" description:"设置类型 0：心率异常提醒 1：呼吸率异常提醒 2：离床预警提醒 3：紧急求助开关"` // 设置类型 0：心率异常提醒 1：呼吸率异常提醒 2：离床预警提醒 3：紧急求助开关
+	MinSpeed          uint32 `json:"minSpeed" description:"最小值"`                                        // 最小值
+	MaxSpeed          uint32 `json:"maxSpeed" description:"最大值"`                                        // 最大值
+	OutOfBedStartTime string `json:"outOfBedStartTime" description:"离床预警区间-开始时间"`                       // 离床预警区间-开始时间
+	OutOfBedEndTime   string `json:"outOfBedEndTime" description:"离床预警区间-结束时间"`                         // 离床预警区间-结束时间
+	OutOfBedInterval  int    `json:"outOfBedInterval" description:"离床未归提醒分钟数"`
+}

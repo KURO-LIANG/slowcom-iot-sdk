@@ -5,7 +5,7 @@ type SleepReport struct {
 	SN         string `json:"sn"`
 	UserName   string `json:"userName"`
 	CreateTime string `json:"createTime"`
-	Detail     Detail `json:"detail"`
+	Detail     string `json:"detail"`
 }
 
 type Detail struct {

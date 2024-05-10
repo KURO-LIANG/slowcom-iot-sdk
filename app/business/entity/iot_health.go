@@ -52,4 +52,5 @@ type SleepAlarmSetting struct {
 	OutOfBedStartTime string `json:"outOfBedStartTime" description:"离床预警区间-开始时间"`                       // 离床预警区间-开始时间
 	OutOfBedEndTime   string `json:"outOfBedEndTime" description:"离床预警区间-结束时间"`                         // 离床预警区间-结束时间
 	OutOfBedInterval  int    `json:"outOfBedInterval" description:"离床未归提醒分钟数"`
+	NoticeMinutes     int    `json:"noticeMinutes" description:"通知时间间隔，单位分钟"`
 }

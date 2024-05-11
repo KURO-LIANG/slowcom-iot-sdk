@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/kuro-liang/slowcom-iot-sdk/app/business/entity"
 	"github.com/kuro-liang/slowcom-iot-sdk/app/business/service"
 	"github.com/kuro-liang/slowcom-iot-sdk/http"
 )
@@ -32,31 +30,10 @@ func main() {
 	}
 	request1 := service.HealthRequest{IotClient: client}
 	//
-	res1, err := request1.GetSleepReport("84F70369AB54", 1)
+	res1, err := request1.AnalysisReportDetail(346)
 	if err != nil {
 		fmt.Println("请求错误：", err)
 		return
 	}
-	bs, e1 := json.Marshal(res1)
-	if e1 != nil {
-		fmt.Println("解析错误：", e1)
-		return
-	}
-	var sleepRecordRes entity.SleepRecordResult
-	err = json.Unmarshal(bs, &sleepRecordRes)
-	if err != nil {
-		fmt.Println("解析错误：", err)
-		return
-	}
-	if sleepRecordRes.Data == nil || len(sleepRecordRes.Data) == 0 {
-		fmt.Println("没有数据")
-		return
-	}
-	var detail entity.Detail
-	err = json.Unmarshal([]byte(sleepRecordRes.Data[0].Detail), &detail)
-	if err != nil {
-		fmt.Println("解析错误：", err)
-		return
-	}
-	fmt.Printf("睡眠带报告：%+v", detail)
+	fmt.Printf("睡眠带报告：%+v", res1.Data)
 }

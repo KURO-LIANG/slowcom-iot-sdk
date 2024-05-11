@@ -203,8 +203,8 @@ type SleepConfig struct {
 	BedTime    string `json:"bedTime" binding:"required"  description:"就寝目标"`
 }
 type Knowledge struct {
-	SleepTips string `json:"sleepTips" description:"睡眠小贴士"`
-	//HealthKnowledge string `json:"healthKnowledge" description:"健康小知识"`
+	SleepTips       string `json:"sleepTips" description:"睡眠小贴士"`
+	HealthKnowledge string `json:"healthKnowledge" description:"健康小知识"`
 }
 
 type SleepHistory struct {

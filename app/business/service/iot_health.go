@@ -31,7 +31,7 @@ func (s *HealthRequest) AlarmSetting(req entity.SleepAlarmSettingReq) (res *http
 }
 
 // AnalysisReportDetail 获取睡眠带报告分析
-func (s *HealthRequest) AnalysisReportDetail(id int) (sleepAnalysisDetailRes result.SleepAnalysisDetailRes, err error) {
+func (s *HealthRequest) AnalysisReportDetail(id int) (sleepAnalysisDetailRes *result.SleepAnalysisDetailRes, err error) {
 	res, err := s.IotClient.Get(fmt.Sprintf("/health/sleep/report/analysis/detail?id=%d", id))
 	if err != nil {
 		return

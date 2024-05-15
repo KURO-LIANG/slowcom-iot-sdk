@@ -13,8 +13,8 @@ type HealthRequest struct {
 }
 
 // GetSleepReport 获取睡眠报告
-func (s *HealthRequest) GetSleepReport(sn string, groupId string, limit int) (res *http.IotRes, err error) {
-	res, err = s.IotClient.Get(fmt.Sprint("/health/sleep/report/list?sn=", sn, "&groupId=", groupId, "&limit=", limit))
+func (s *HealthRequest) GetSleepReport(sn string, groupId string, version string, limit int) (res *http.IotRes, err error) {
+	res, err = s.IotClient.Get(fmt.Sprint("/health/sleep/report/list?sn=", sn, "&groupId=", groupId, "&limit=", limit, "&version=", version))
 	return
 }
 

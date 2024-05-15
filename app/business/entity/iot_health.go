@@ -1,18 +1,31 @@
 package entity
 
 type SleepRecordResult struct {
-	Code         int           `json:"code"`
-	ErrorMessage string        `json:"errorMessage"`
-	Message      string        `json:"message"`
-	Data         []SleepReport `json:"data"`
+	Code         int             `json:"code"`
+	ErrorMessage string          `json:"errorMessage"`
+	Message      string          `json:"message"`
+	Data         []SleepReportV2 `json:"data"`
 }
 
 type SleepReport struct {
-	ID         int    `json:"id"`
-	SN         string `json:"sn"`
-	UserName   string `json:"userName"`
-	CreateTime string `json:"createTime"`
-	Detail     string `json:"detail"`
+	ID         int64  `json:"id" description:"ID"`
+	GroupId    string `json:"groupId"  description:"组ID"`
+	SN         string `json:"sn"  description:"设备ID"`
+	UserName   string `json:"userName"  description:"设备绑定的用户名称"`
+	GoBedTime  string `json:"goBedTime" description:"就寝时间"`
+	OutBedTime string `json:"outBedTime" description:"离床时间"`
+	Detail     string `json:"detail" description:"睡眠报告数据"`
+	CreateTime string `json:"createTime" description:"报告日期"`
+	Remark     string `json:"remark" description:"报告生成的数据分析"`
+	WakeUpTime string `json:"wakeUpTime" description:"就寝目标"`
+	BedTime    string `json:"bedTime" description:"起床目标"`
+}
+
+type SleepReportV2 struct {
+	GroupId    string         `json:"groupId"  description:"组ID"`
+	SN         string         `json:"sn"  description:"设备ID"`
+	CreateTime string         `json:"createTime" description:"报告日期"`
+	List       []*SleepReport `json:"list" description:"报告列表，用于版本2，报告按日期分组显示不同时段的报告"`
 }
 
 type Detail struct {

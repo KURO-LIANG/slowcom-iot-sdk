@@ -12,7 +12,7 @@ type GatewayGroupRequest struct {
 
 // Save 添加或修改组
 func (s *GatewayGroupRequest) Save(req *entity.GatewayGroupAddOrUpdate) (resData *entity.GatewayGroupAddOrUpdateRes, err error) {
-	res, err := s.IotClient.PostJson("/device/group/split/save", req)
+	res, err := s.IotClient.PostJson("/device/collection/saveOverall", req)
 	if err == nil {
 		resData = new(entity.GatewayGroupAddOrUpdateRes)
 		var mapData = res.Data.(map[string]interface{})
@@ -23,7 +23,7 @@ func (s *GatewayGroupRequest) Save(req *entity.GatewayGroupAddOrUpdate) (resData
 
 // Delete 删除组
 func (s *GatewayGroupRequest) Delete(req *entity.GatewayGroupDelete) (res *http.IotRes, err error) {
-	res, err = s.IotClient.PostJson("/device/group/split/delete", req)
+	res, err = s.IotClient.PostJson("/device/collection/delete", req)
 	return
 }
 

@@ -17,6 +17,7 @@ type IotClient struct {
 	Username     string
 	Password     string
 	AccessToken  string
+	Version      string
 	rwLock       sync.RWMutex
 }
 
@@ -24,6 +25,8 @@ const (
 	USERAGENT       = "slowcom_agent"
 	TIMEOUT         = 30
 	CONNECT_TIMEOUT = 30
+	IotVersionV1    = "v1"
+	IotVersionV2    = "v2"
 )
 
 // 生成一个http请求客户端

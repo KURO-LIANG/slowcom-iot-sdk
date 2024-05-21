@@ -19,3 +19,7 @@ type ControlContextualReq struct {
 	// 格式：平台_用户名
 	From string `json:"from" description:"操作来源"`
 }
+
+type FindAllByCollectionId struct {
+	CollectionId string `json:"collectionId"` // 设备合集id
+}

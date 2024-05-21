@@ -39,11 +39,14 @@ func (s *GatewayGroupRequest) Delete(req *entity.GatewayGroupDelete) (res *http.
 
 // GroupDetail 查询组信息
 func (s *GatewayGroupRequest) GroupDetail(groupId string) (res *http.IotRes, err error) {
-	url := "/device/group/room/detail/"
 	if s.IotClient.Version == "" || s.IotClient.Version == "v1" {
-		url = "/device/group/room/detail/"
+		res, err = s.IotClient.Get(fmt.Sprint("/device/group/room/detail/", groupId))
+	} else {
+		res, err = s.IotClient.PostJson("/device/collection/detail", entity.GetCollectionDetail{
+			Id:      groupId,
+			Ranking: false,
+		})
 	}
-	res, err = s.IotClient.Get(fmt.Sprint(url, groupId))
 	return
 }
 

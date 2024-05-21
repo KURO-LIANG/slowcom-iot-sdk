@@ -14,3 +14,8 @@ type GatewayGroupAddOrUpdateRes struct {
 type GatewayGroupDelete struct {
 	Id string `json:"id" description:"组ID"`
 }
+
+type GetCollectionDetail struct {
+	Id      string `json:"id" binding:"required"` // 设备合集id
+	Ranking bool   `json:"ranking"`               // 是否按一周内的执行次数倒叙排序
+}

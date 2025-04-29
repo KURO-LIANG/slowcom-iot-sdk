@@ -19,7 +19,7 @@ type IotRes struct {
 // checkResponse 校验请求
 func checkResponse(res *httpclient.Response, requestError error) (iotResponse *IotRes, err error) {
 	if requestError != nil {
-		return nil, serror.New(405, "请求服务异常：请求超时")
+		return nil, requestError
 	}
 	fmt.Printf("iot-sdk 请求结果<== %d - %s\n", res.Response.StatusCode, res.Response.Status)
 	if res.Response.StatusCode != 200 {

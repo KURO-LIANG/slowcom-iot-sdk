@@ -17,6 +17,7 @@ type IotClient struct {
 	Username     string
 	Password     string
 	AccessToken  string
+	Lang         string // 语言 en英文, zh-CN中文
 	rwLock       sync.RWMutex
 }
 
@@ -39,7 +40,7 @@ func buildHttpClient() *httpclient.HttpClient {
 
 // PostJson json请求
 func (s *IotClient) PostJson(url string, data interface{}) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).WithHeader("lang", s.Lang).
 		PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
@@ -47,7 +48,7 @@ func (s *IotClient) PostJson(url string, data interface{}) (response *IotRes, er
 
 // PutJson json请求
 func (s *IotClient) PutJson(url, data interface{}) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).WithHeader("lang", s.Lang).
 		PutJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	response, err = checkResponse(res, err)
 	return
@@ -55,7 +56,7 @@ func (s *IotClient) PutJson(url, data interface{}) (response *IotRes, err error)
 
 // Get get请求
 func (s *IotClient) Get(url string) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).WithHeader("lang", s.Lang).
 		Get(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
@@ -63,7 +64,7 @@ func (s *IotClient) Get(url string) (response *IotRes, err error) {
 
 // Delete 删除请求
 func (s *IotClient) Delete(url string) (response *IotRes, err error) {
-	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).Delete(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
+	res, err := buildHttpClient().WithHeader("Authorization", s.AccessToken).WithHeader("lang", s.Lang).Delete(fmt.Sprintf("%s%s", s.BaseUrl, url), netUrl.Values{})
 	response, err = checkResponse(res, err)
 	return
 }
@@ -72,10 +73,10 @@ func (s *IotClient) Delete(url string) (response *IotRes, err error) {
 func (s *IotClient) GetToken(url string, data interface{}) (response *entity.IotTokenRes, err error) {
 	res, err := buildHttpClient().PostJson(fmt.Sprintf("%s%s", s.BaseUrl, url), data)
 	if err != nil {
-		return nil, serror.New(405, "请求服务异常：请求超时")
+		return nil, err
 	}
 	if res.Response.StatusCode != 200 {
-		return nil, serror.New(res.Response.StatusCode, fmt.Sprint(res.Response.StatusCode, " 请求服务异常"))
+		return nil, serror.New(res.Response.StatusCode, fmt.Sprint(res.Response.StatusCode, " Exception"))
 	}
 	bytes, err := res.ReadAll()
 	if err != nil {

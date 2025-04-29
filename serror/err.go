@@ -12,17 +12,17 @@ func (e Error) Error() string {
 var (
 	ErrIs系统异常 = &Error{
 		Code:    101,
-		Message: "系统异常",
+		Message: "System Exception",
 	}
 
 	ErrIs请求状态异常 = &Error{
 		Code:    102,
-		Message: "http状态异常",
+		Message: "Http Exception",
 	}
 
 	ErrIs数据解析异常 = &Error{
 		Code:    103,
-		Message: "数据解析异常",
+		Message: "Data Parsing Exception",
 	}
 )
 
